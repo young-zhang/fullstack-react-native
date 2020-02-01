@@ -3,13 +3,13 @@ import {NativeSyntheticEvent, StyleSheet, TextInput, TextInputSubmitEditingEvent
 
 interface SearchInputProps {
     placeholder: string
-    location: string
+    onSubmit: (string) => void
 }
 
-export default class SearchInput extends React.Component<SearchInputProps, {text: string}> {
+export default class SearchInput extends React.Component<SearchInputProps, { text: string }> {
     constructor(props) {
         super(props);
-        this.state = { text: '' };
+        this.state = {text: ''};
     }
 
     // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
@@ -18,7 +18,12 @@ export default class SearchInput extends React.Component<SearchInputProps, {text
         this.setState({text});
     };
 
-    handleSubmitEditing =  (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+    handleSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+        const {onSubmit} = this.props;
+        const {text} = this.state;
+        if (!text) return;
+        onSubmit(text);
+        this.setState({text: ''});
     };
 
     render() {

@@ -4,9 +4,19 @@ import {ImageBackground, KeyboardAvoidingView, Platform, StyleSheet, Text, View}
 import getImageForWeather from './utils/getImageForWeather';
 import SearchInput from './components/SearchInput';
 
-export default class App extends React.Component {
+export default class App extends React.Component<{}, { location: string }> {
+    constructor(props) {
+        super(props);
+        this.state = {location: 'San Francisco'};
+    }
+
+    handleUpdateLocation = (city: string) => {
+        this.setState({location: city});
+        console.log("handleUpdateLocation(" + this.state.location + ")");
+    };
+
     render() {
-        const location = 'San Francisco';
+        const {location} = this.state;
 
         return (
             <KeyboardAvoidingView style={styles.container} behavior="height">
@@ -24,7 +34,7 @@ export default class App extends React.Component {
                         </Text>
                         <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
 
-                        <SearchInput placeholder="Search any city"/>
+                        <SearchInput placeholder="Search any city" onSubmit={this.handleUpdateLocation}/>
                     </View>
                 </ImageBackground>
             </KeyboardAvoidingView>
