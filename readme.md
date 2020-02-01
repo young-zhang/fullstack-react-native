@@ -1,3 +1,7 @@
+This repo is just me working through the book
+[Fullstack React Native: The complete guide to React Native!](https://www.newline.co/fullstack-react-native/)
+using TypeScript.
+
 ## Getting Started with React Native
 p14: `yarn global add expo-cli@3.11.7`
 
