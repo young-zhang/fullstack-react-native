@@ -1,29 +1,41 @@
 import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {NativeSyntheticEvent, StyleSheet, TextInput, TextInputSubmitEditingEventData, View} from 'react-native';
 
 interface SearchInputProps {
     placeholder: string
     location: string
 }
 
-export default class SearchInput extends React.Component<SearchInputProps> {
+export default class SearchInput extends React.Component<SearchInputProps, {text: string}> {
+    constructor(props) {
+        super(props);
+        this.state = { text: '' };
+    }
+
     // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
     // see: https://itnext.io/property-initializers-what-why-and-how-to-use-it-5615210474a3
-    handleChangeText = (newLocation: string) => {
-        this.props.location = newLocation; // doesn't work because this.props is immutable
+    handleChangeText = (text: string) => {
+        this.setState({text});
+    };
+
+    handleSubmitEditing =  (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
     };
 
     render() {
+        const {placeholder} = this.props;
+        const {text} = this.state;
         return (
             <View style={styles.container}>
                 <TextInput
                     autoCorrect={false}
-                    placeholder={this.props.placeholder}
+                    value={text}
+                    placeholder={placeholder}
                     placeholderTextColor="white"
                     underlineColorAndroid="transparent"
                     style={styles.textInput}
                     clearButtonMode="always"
                     onChangeText={this.handleChangeText}
+                    onSubmitEditing={this.handleSubmitEditing}
                 />
             </View>
         );
