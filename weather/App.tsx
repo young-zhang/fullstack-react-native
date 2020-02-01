@@ -1,13 +1,37 @@
 import React from 'react';
-import {ImageBackground, KeyboardAvoidingView, Platform, StyleSheet, Text, View} from 'react-native';
+import {
+    ActivityIndicator,
+    ImageBackground,
+    KeyboardAvoidingView,
+    Platform,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native';
 
+import {fetchLocationId, fetchWeather} from './utils/api';
 import getImageForWeather from './utils/getImageForWeather';
 import SearchInput from './components/SearchInput';
 
-export default class App extends React.Component<{}, { location: string }> {
+interface AppState {
+    loading: boolean
+    error: boolean
+    location: string
+    temperature: number
+    weather: string
+}
+
+export default class App extends React.Component<{}, AppState> {
     constructor(props) {
         super(props);
-        this.state = {location: ''};
+        this.state = {
+            loading: false,
+            error: false,
+            location: '',
+            temperature: 0,
+            weather: ''
+        };
     }
 
     componentDidMount() {
