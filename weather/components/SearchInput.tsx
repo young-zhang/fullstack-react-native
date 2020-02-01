@@ -2,7 +2,9 @@ import React from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 
 export default class SearchInput extends React.Component<{ placeholder: string }> {
-    handleChangeText(newLocation: string) {
+    // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+    // see: https://itnext.io/property-initializers-what-why-and-how-to-use-it-5615210474a3
+    handleChangeText = (newLocation: string) => {
         // do something with newLocation
     };
 
@@ -16,7 +18,7 @@ export default class SearchInput extends React.Component<{ placeholder: string }
                     underlineColorAndroid="transparent"
                     style={styles.textInput}
                     clearButtonMode="always"
-                    onChangeText={this.handleChangeText.bind(this)}
+                    onChangeText={this.handleChangeText}
                 />
             </View>
         );
