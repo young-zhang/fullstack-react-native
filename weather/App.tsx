@@ -39,9 +39,29 @@ export default class App extends React.Component<{}, AppState> {
         this.handleUpdateLocation('San Francisco');
     }
 
-    handleUpdateLocation = (city: string) => {
-        console.log("handleUpdateLocation(" + city + ")");
-        this.setState({location: city});
+    handleUpdateLocation = async (city: string) => {
+        if (!city) return;
+
+        this.setState({loading: true}, async () => {
+            try {
+                let locationId = await fetchLocationId(city);
+                const {location, weather, temperature} = await fetchWeather(locationId);
+
+                this.setState({
+                    loading: false,
+                    error: false,
+                    location,
+                    weather,
+                    temperature,
+                });
+            }
+            catch (e) {
+                this.setState({
+                    loading: false,
+                    error: true,
+                });
+            }
+        });
     };
 
     render() {

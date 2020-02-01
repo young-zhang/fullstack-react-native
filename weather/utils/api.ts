@@ -1,4 +1,4 @@
-export const fetchLocationId = async city => {
+export const fetchLocationId = async (city: string): Promise<number> => {
     const response = await fetch(
         `https://www.metaweather.com/api/location/search/?query=${city}`,
     );
@@ -6,7 +6,13 @@ export const fetchLocationId = async city => {
     return locations[0].woeid;
 };
 
-export const fetchWeather = async woeId => {
+interface WeatherData {
+    location: string
+    weather: string
+    temperature: number
+}
+
+export const fetchWeather = async (woeId: number): Promise<WeatherData> => {
     const response = await fetch(
         `https://www.metaweather.com/api/location/${woeId}/`,
     );
