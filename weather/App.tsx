@@ -7,12 +7,17 @@ import SearchInput from './components/SearchInput';
 export default class App extends React.Component<{}, { location: string }> {
     constructor(props) {
         super(props);
-        this.state = {location: 'San Francisco'};
+        this.state = {location: ''};
+    }
+
+    componentDidMount() {
+        // Called immediately after a component is mounted. Setting state here will trigger re-rendering.
+        this.handleUpdateLocation('San Francisco');
     }
 
     handleUpdateLocation = (city: string) => {
+        console.log("handleUpdateLocation(" + city + ")");
         this.setState({location: city});
-        console.log("handleUpdateLocation(" + this.state.location + ")");
     };
 
     render() {
