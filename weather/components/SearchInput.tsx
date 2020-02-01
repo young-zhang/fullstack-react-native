@@ -1,11 +1,16 @@
 import React from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 
-export default class SearchInput extends React.Component<{ placeholder: string }> {
+interface SearchInputProps {
+    placeholder: string
+    location: string
+}
+
+export default class SearchInput extends React.Component<SearchInputProps> {
     // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
     // see: https://itnext.io/property-initializers-what-why-and-how-to-use-it-5615210474a3
     handleChangeText = (newLocation: string) => {
-        // do something with newLocation
+        this.props.location = newLocation; // doesn't work because this.props is immutable
     };
 
     render() {
