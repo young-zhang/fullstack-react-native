@@ -9,3 +9,5 @@ p15: `expo init weather --template expo-template-blank-typescript@sdk-36 --yarn`
 
 ## React Fundamentals
 p96: `expo init time-tracking --template expo-template-blank-typescript@sdk-36 --yarn`
+
+See: [Building React Stateless Functional Components with TypeScript](https://www.pluralsight.com/guides/typescript-building-react-components)
