@@ -3,12 +3,18 @@ import {StyleSheet, View, Text, TextInput, GestureResponderEvent} from 'react-na
 
 import TimerButton from './TimerButton';
 
+export interface TimerProperties {
+    id : string
+    title : string
+    project : string
+}
+
 interface P {
     id?: string,
     title?: string,
     project?: string
     onFormClose?: (event: GestureResponderEvent) => void
-    onFormSubmit?: (timer: any) => void
+    onFormSubmit?: (timer: TimerProperties) => void
 }
 
 interface S {
