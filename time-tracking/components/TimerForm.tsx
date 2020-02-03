@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TextInput} from 'react-native';
+import {StyleSheet, View, Text, TextInput, GestureResponderEvent} from 'react-native';
 
 import TimerButton from './TimerButton';
 
@@ -7,6 +7,8 @@ interface P {
     id?: string,
     title?: string,
     project?: string
+    onFormClose?: (event: GestureResponderEvent) => void
+    onFormSubmit?: any
 }
 
 interface S {
@@ -34,8 +36,19 @@ export default class TimerForm extends React.Component<P, S> {
         this.setState({project});
     };
 
+    handleSubmit = () => {
+        const { onFormSubmit, id } = this.props;
+        const { title, project } = this.state;
+
+        onFormSubmit({
+            id,
+            title,
+            project,
+        });
+    };
+
     render() {
-        const {id} = this.props;
+        const {id, onFormClose} = this.props;
         const {title, project} = this.state;
 
         const submitText = id ? 'Update' : 'Create';
@@ -61,8 +74,8 @@ export default class TimerForm extends React.Component<P, S> {
                     </View>
                 </View>
                 <View style={styles.buttonGroup}>
-                    <TimerButton small color="#21BA45" title={submitText} />
-                    <TimerButton small color="#DB2828" title="Cancel" />
+                    <TimerButton small color="#21BA45" title={submitText} onPress={this.handleSubmit} />
+                    <TimerButton small color="#DB2828" title="Cancel" onPress={onFormClose} />
                 </View>
             </View>
         );
