@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import TimerButton from './TimerButton';
 import TimerForm from './TimerForm';
 
-const ToggleableTimerForm: React.FC<{ isOpen: boolean }> = (p) => {
+const ToggleableTimerForm: React.FC<{ isOpen?: boolean }> = (p) => {
     return (
         <View style={[styles.container, !p.isOpen && styles.buttonPadding]}>
             {p.isOpen ? (

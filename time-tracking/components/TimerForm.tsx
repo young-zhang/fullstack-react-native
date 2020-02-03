@@ -4,7 +4,7 @@ import {StyleSheet, View, Text, TextInput} from 'react-native';
 import TimerButton from './TimerButton';
 
 interface P {
-    id? : number,
+    id? : string,
     title? : string,
     project? : string
 }

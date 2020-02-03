@@ -4,7 +4,7 @@ import TimerForm from './TimerForm';
 import Timer from './Timer';
 
 interface P {
-    id: number
+    id: string
     title: string
     project: string
     elapsed: number
