@@ -8,7 +8,7 @@ interface P {
     title?: string,
     project?: string
     onFormClose?: (event: GestureResponderEvent) => void
-    onFormSubmit?: any
+    onFormSubmit?: (timer: any) => void
 }
 
 interface S {

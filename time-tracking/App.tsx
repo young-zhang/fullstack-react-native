@@ -3,6 +3,7 @@ import uuidv4 from 'uuid/v4'
 
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
+import {newTimer} from './utils/TimerUtils';
 import EditableTimer from './components/EditableTimer';
 import ToggleableTimerForm from './components/ToggleableTimerForm';
 
@@ -14,7 +15,7 @@ interface TimerState {
     isRunning: boolean
 }
 
-export default class App extends React.Component<{},{timers:TimerState[]}> {
+export default class App extends React.Component<{}, { timers: TimerState[] }> {
     state = {
         timers: [
             {
@@ -34,6 +35,11 @@ export default class App extends React.Component<{},{timers:TimerState[]}> {
         ]
     };
 
+    handleCreateFormSubmit = timer => {
+        const {timers} = this.state;
+        this.setState({timers: [newTimer(timer), ...timers],});
+    };
+
     render() {
         const {timers} = this.state;
 
@@ -43,7 +49,7 @@ export default class App extends React.Component<{},{timers:TimerState[]}> {
                     <Text style={styles.title}>Timers</Text>
                 </View>
                 <ScrollView style={styles.timerList}>
-                    <ToggleableTimerForm />
+                    <ToggleableTimerForm onFormSubmit={this.handleCreateFormSubmit} />
                     {timers.map(
                         ({title, project, id, elapsed, isRunning}) => (
                             <EditableTimer
