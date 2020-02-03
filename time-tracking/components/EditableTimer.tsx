@@ -9,21 +9,26 @@ interface P {
     project: string
     elapsed: number
     isRunning?: boolean
-    editFormOpen?: boolean
 }
 
-// see: https://www.pluralsight.com/guides/typescript-building-react-components
-const EditableTimer : React.FC<P> = (p) => {
-    if (p.editFormOpen) {
-        return <TimerForm id={p.id} title={p.title} project={p.project} />;
-    }
-    return (
-        <Timer id={p.id}
-               title={p.title}
-               project={p.project}
-               elapsed={p.elapsed}
-               isRunning={p.isRunning} />
-    );
-};
+export default class EditableTimer extends React.Component<P, {editFormOpen: boolean}> {
+    state = {
+        editFormOpen: false
+    };
 
-export default EditableTimer;
+    render() {
+        const {id, title, project, elapsed, isRunning} = this.props;
+        const {editFormOpen} = this.state;
+
+        if (editFormOpen) {
+            return <TimerForm id={id} title={title} project={project} />;
+        }
+        return (
+            <Timer id={id}
+                   title={title}
+                   project={project}
+                   elapsed={elapsed}
+                   isRunning={isRunning} />
+        );
+    }
+}
