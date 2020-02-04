@@ -15,3 +15,6 @@ See: [Building React Stateless Functional Components with TypeScript](https://ww
 p119: `expo install uuid`
 
 p164: [Default props with class component for TypeScript](https://stackoverflow.com/a/37282264/584829)
+
+## Core Components, Part 1
+p171: `expo init image-feed --template expo-template-blank-typescript@sdk-36 --yarn`
