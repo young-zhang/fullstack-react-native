@@ -10,12 +10,18 @@ interface P {
     project: string
     elapsed: number
     isRunning: boolean
-    onEditPress?: (event: GestureResponderEvent) => void
+    onEditPress: (event: GestureResponderEvent) => void
+    onRemovePress: (id: string) => void
 }
 
 export default class Timer extends React.Component<P> {
+    handleRemovePress = () => {
+        const { id, onRemovePress } = this.props;
+        onRemovePress(id);
+    };
+
     render() {
-        const {elapsed, title, project, onEditPress} = this.props;
+        const {elapsed, title, project, onEditPress, onRemovePress} = this.props;
         const elapsedString = millisecondsToHuman(elapsed);
 
         return (
@@ -25,7 +31,7 @@ export default class Timer extends React.Component<P> {
                 <Text style={styles.elapsedTime}>{elapsedString}</Text>
                 <View style={styles.buttonGroup}>
                     <TimerButton color="blue" small title="Edit" onPress={onEditPress} />
-                    <TimerButton color="blue" small title="Remove" />
+                    <TimerButton color="blue" small title="Remove" onPress={this.handleRemovePress} />
                 </View>
                 <TimerButton color="#21BA45" title="Start" />
             </View>

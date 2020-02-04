@@ -11,6 +11,7 @@ interface P {
     elapsed: number
     isRunning?: boolean
     onFormSubmit: (timer: TimerProperties) => void
+    onRemovePress: (id: string) => void
 }
 
 export default class EditableTimer extends React.Component<P, { editFormOpen: boolean }> {
@@ -42,7 +43,7 @@ export default class EditableTimer extends React.Component<P, { editFormOpen: bo
     };
 
     render() {
-        const {id, title, project, elapsed, isRunning} = this.props;
+        const {id, title, project, elapsed, isRunning, onRemovePress} = this.props;
         const {editFormOpen} = this.state;
 
         if (editFormOpen) {
@@ -56,7 +57,8 @@ export default class EditableTimer extends React.Component<P, { editFormOpen: bo
                    project={project}
                    elapsed={elapsed}
                    isRunning={isRunning}
-                   onEditPress={this.handleEditPress} />
+                   onEditPress={this.handleEditPress}
+                   onRemovePress={onRemovePress} />
         );
     }
 }

@@ -60,6 +60,10 @@ export default class App extends React.Component<{}, { timers: TimerState[] }> {
         });
     };
 
+    handleRemovePress = (timerId: string) => {
+        this.setState({timers: this.state.timers.filter(t => t.id !== timerId)});
+    };
+
     render() {
         const {timers} = this.state;
 
@@ -79,7 +83,8 @@ export default class App extends React.Component<{}, { timers: TimerState[] }> {
                                 project={project}
                                 elapsed={elapsed}
                                 isRunning={isRunning}
-                                onFormSubmit={this.handleFormSubmit} />
+                                onFormSubmit={this.handleFormSubmit}
+                                onRemovePress={this.handleRemovePress} />
                         ),
                     )}
                 </ScrollView>
