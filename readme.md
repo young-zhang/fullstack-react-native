@@ -13,3 +13,5 @@ p96: `expo init time-tracking --template expo-template-blank-typescript@sdk-36 -
 See: [Building React Stateless Functional Components with TypeScript](https://www.pluralsight.com/guides/typescript-building-react-components)
 
 p119: `expo install uuid`
+
+p164: [Default props with class component for TypeScript](https://stackoverflow.com/a/37282264/584829)

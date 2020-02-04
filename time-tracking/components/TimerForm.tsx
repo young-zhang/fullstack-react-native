@@ -23,6 +23,12 @@ interface S {
 }
 
 export default class TimerForm extends React.Component<P, S> {
+    public static defaultProps = {
+        id: null,
+        title: '',
+        project: ''
+    };
+
     constructor(props) {
         super(props);
 

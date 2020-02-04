@@ -19,6 +19,8 @@ const TimerButton: React.FC<P> = (p) => {
     );
 };
 
+TimerButton.defaultProps = {small: false};
+
 export default TimerButton;
 
 const styles = StyleSheet.create({
