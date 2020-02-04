@@ -5,7 +5,7 @@ interface P {
     color: string,
     title: string,
     small?: boolean,
-    onPress?: (event: GestureResponderEvent) => void
+    onPress: (event: GestureResponderEvent) => void
 }
 
 const TimerButton: React.FC<P> = (p) => {

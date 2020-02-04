@@ -12,16 +12,36 @@ interface P {
     isRunning: boolean
     onEditPress: (event: GestureResponderEvent) => void
     onRemovePress: (id: string) => void
+    onStartPress: (id: string) => void
+    onStopPress: (id: string) => void
 }
 
 export default class Timer extends React.Component<P> {
     handleRemovePress = () => {
-        const { id, onRemovePress } = this.props;
+        const {id, onRemovePress} = this.props;
         onRemovePress(id);
     };
 
+    handleStartPress = () => {
+        const {id, onStartPress} = this.props;
+        onStartPress(id);
+    };
+
+    handleStopPress = () => {
+        const {id, onStopPress} = this.props;
+        onStopPress(id);
+    };
+
+    renderActionButton = () => {
+        const {isRunning} = this.props;
+        if (isRunning) {
+            return (<TimerButton color="#DB2828" title="Stop" onPress={this.handleStopPress} />);
+        }
+        return (<TimerButton color="#21BA45" title="Start" onPress={this.handleStartPress} />);
+    };
+
     render() {
-        const {elapsed, title, project, onEditPress, onRemovePress} = this.props;
+        const {elapsed, title, project, onEditPress} = this.props;
         const elapsedString = millisecondsToHuman(elapsed);
 
         return (
@@ -33,7 +53,7 @@ export default class Timer extends React.Component<P> {
                     <TimerButton color="blue" small title="Edit" onPress={onEditPress} />
                     <TimerButton color="blue" small title="Remove" onPress={this.handleRemovePress} />
                 </View>
-                <TimerButton color="#21BA45" title="Start" />
+                {this.renderActionButton()}
             </View>
         );
     }

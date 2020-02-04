@@ -85,6 +85,27 @@ export default class App extends React.Component<{}, { timers: TimerState[] }> {
         this.setState({timers: this.state.timers.filter(t => t.id !== timerId)});
     };
 
+    toggleTimer = timerId => {
+        this.setState(prevState => {
+            const {timers} = prevState;
+
+            return {
+                timers: timers.map(timer => {
+                    const {id, isRunning} = timer;
+
+                    if (id === timerId) {
+                        return {
+                            ...timer,
+                            isRunning: !isRunning,
+                        };
+                    }
+
+                    return timer;
+                })
+            };
+        });
+    };
+
     render() {
         const {timers} = this.state;
 
@@ -105,7 +126,9 @@ export default class App extends React.Component<{}, { timers: TimerState[] }> {
                                 elapsed={elapsed}
                                 isRunning={isRunning}
                                 onFormSubmit={this.handleFormSubmit}
-                                onRemovePress={this.handleRemovePress} />
+                                onRemovePress={this.handleRemovePress}
+                                onStartPress={this.toggleTimer}
+                                onStopPress={this.toggleTimer} />
                         ),
                     )}
                 </ScrollView>

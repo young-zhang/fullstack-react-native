@@ -13,8 +13,8 @@ interface P {
     id?: string,
     title?: string,
     project?: string
-    onFormClose?: (event: GestureResponderEvent) => void
-    onFormSubmit?: (timer: TimerProperties) => void
+    onFormClose: (event: GestureResponderEvent) => void
+    onFormSubmit: (timer: TimerProperties) => void
 }
 
 interface S {
