@@ -9,7 +9,7 @@ interface P {
 }
 
 const Avatar: React.FC<P> = (p) => {
-    const {size, backgroundColor} = p;
+    const {initials, size, backgroundColor} = p;
     const style = {
         width: size,
         height: size,
@@ -18,8 +18,20 @@ const Avatar: React.FC<P> = (p) => {
     };
 
     return (
-        <View style={style} />
+        <View style={[styles.container, style]}>
+            <Text style={styles.text}>{initials}</Text>
+        </View>
     );
 };
 
 export default Avatar;
+
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        color: 'white',
+    }
+});
