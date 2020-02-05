@@ -18,3 +18,5 @@ p164: [Default props with class component for TypeScript](https://stackoverflow.
 
 ## Core Components, Part 1
 p171: `expo init image-feed --template expo-template-blank-typescript@sdk-36 --yarn`
+
+p196: `yarn add expo-constants`
