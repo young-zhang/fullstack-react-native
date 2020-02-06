@@ -4,14 +4,16 @@ import Constants from 'expo-constants';
 
 import Avatar from './components/Avatar';
 import AuthorRow from "./components/AuthorRow";
+import Card from './components/Card';
 
 export default class App extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <AuthorRow fullname={'First Last'}
-                           linkText={'Comments'}
-                           onPressLinkText={() => console.log('Pressed link!')} />
+                <Card fullname={'First Last'}
+                      linkText={'Comments'}
+                      onPressLinkText={() => console.log('Pressed link!')}
+                      image={{uri: 'https://unsplash.it/600/600'}} />
             </View>
         );
     }
