@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import React from "react";
 
 interface P {
     title?: string

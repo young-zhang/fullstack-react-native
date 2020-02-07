@@ -4,14 +4,15 @@ import {
     ViewPropTypes,
     SafeAreaView, ViewStyle,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import {fetchImages} from '../utils/api';
 import CardList from '../components/CardList';
 
 interface P {
-    style: ViewStyle
+    style?: ViewStyle
+    commentsForItem: string[]
+    onPressComments: (GestureResponderEvent) => void
 }
 
 interface S {
@@ -21,7 +22,7 @@ interface S {
 }
 
 export default class Feed extends React.Component<P, S> {
-    static defaultProps: P = {
+    static defaultProps = {
         style: null,
     };
 
@@ -42,7 +43,7 @@ export default class Feed extends React.Component<P, S> {
     }
 
     render() {
-        const {style} = this.props;
+        const {commentsForItem, onPressComments, style} = this.props;
         const {loading, error, items} = this.state;
 
         if (loading) {
@@ -55,7 +56,7 @@ export default class Feed extends React.Component<P, S> {
 
         return (
             <SafeAreaView style={style}>
-                <CardList items={items} />
+                <CardList items={items} commentsForItem={commentsForItem} onPressComments={onPressComments} />
             </SafeAreaView>
         );
     }
