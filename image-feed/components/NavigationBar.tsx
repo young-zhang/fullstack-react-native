@@ -1,4 +1,5 @@
 import {
+    GestureResponderEvent,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -8,7 +9,7 @@ import {
 interface P {
     title?: string
     leftText?: string
-    onPressLeftText?: any
+    onPressLeftText?: (event: GestureResponderEvent) => void;
 }
 
 const NavigationBar: React.FC<P> = (props) => {
