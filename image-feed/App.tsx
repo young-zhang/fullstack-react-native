@@ -17,7 +17,6 @@ export default class App extends React.Component<{}, S> {
         selectedItemId: null,
     };
 
-
     openCommentScreen = id => {
         this.setState({showModal: true, selectedItemId: id});
     };

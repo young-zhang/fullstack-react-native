@@ -1,4 +1,4 @@
-import {FlatList, ListRenderItem} from 'react-native';
+import {FlatList, GestureResponderEvent, ListRenderItem} from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -14,18 +14,29 @@ const keyExtractor: (item: ListItem, index: number) => string = ({id}) => id.toS
 
 interface P {
     items: ListItem[]
+    commentsForItem: string[]
+    onPressComments: (GestureResponderEvent) => void
 }
 
 export default class CardList extends React.Component<P> {
     renderItem: ListRenderItem<ListItem> = (o: { item: ListItem }) => {
         const {id, author} = o.item;
-        return (<Card fullname={author} image={{uri: getImageFromId(id)}} />)
+        const {commentsForItem, onPressComments} = this.props;
+        const comments = commentsForItem[id];
+
+        return (
+            <Card fullname={author}
+                  image={{uri: getImageFromId(id)}}
+                  linkText={`${comments ? comments.length : 0} Comments`}
+                  onPressLinkText={() => onPressComments(id)} />
+        );
     };
 
     render() {
-        const {items} = this.props;
+        const {items, commentsForItem} = this.props;
+
         return (
-            <FlatList data={items} renderItem={this.renderItem} keyExtractor={keyExtractor} />
+            <FlatList data={items} renderItem={this.renderItem} keyExtractor={keyExtractor} extraData={commentsForItem} />
         );
     }
 }
