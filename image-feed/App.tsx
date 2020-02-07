@@ -4,7 +4,28 @@ import Constants from 'expo-constants';
 
 import Feed from './screens/Feed';
 
-export default class App extends React.Component {
+interface S {
+    commentsForItem: any
+    showModal: boolean
+    selectedItemId: string
+}
+
+export default class App extends React.Component<{}, S> {
+    state = {
+        commentsForItem: {},
+        showModal: false,
+        selectedItemId: null,
+    };
+
+
+    openCommentScreen = id => {
+        this.setState({showModal: true, selectedItemId: id});
+    };
+
+    closeCommentScreen = () => {
+        this.setState({showModal: false, selectedItemId: null});
+    };
+
     render() {
         return (
             <View style={styles.container}>
