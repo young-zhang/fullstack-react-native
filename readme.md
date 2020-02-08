@@ -23,3 +23,5 @@ p196: `yarn add expo-constants`
 
 ## Core APIs, Part 1
 p274: `expo init messaging --template expo-template-blank-typescript@sdk-36 --yarn`
+
+p274: `expo install expo-constants expo-permissions expo-media-library expo-cameraroll @react-native-community/netinfo react-native-maps`
