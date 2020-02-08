@@ -5,6 +5,8 @@ import Constants from 'expo-constants';
 import Comments from './screens/Comments';
 import Feed from './screens/Feed';
 
+const ASYNC_STORAGE_COMMENTS_KEY = 'ASYNC_STORAGE_COMMENTS_KEY';
+
 interface S {
     commentsForItem: string[]
     showModal: boolean
@@ -18,8 +20,18 @@ export default class App extends React.Component<{}, S> {
         selectedItemId: null,
     };
 
+    async componentDidMount() {
+        try {
+            const commentsForItem = await AsyncStorage.getItem(ASYNC_STORAGE_COMMENTS_KEY);
+            this.setState({commentsForItem: commentsForItem ? JSON.parse(commentsForItem) : []});
+        }
+        catch (e) {
+            console.log('Failed to load comments');
+        }
+    }
+
     onSubmitComment = async text => {
-        const { selectedItemId, commentsForItem } = this.state;
+        const {selectedItemId, commentsForItem} = this.state;
         const comments = commentsForItem[selectedItemId] || [];
 
         const updated = {
@@ -27,7 +39,14 @@ export default class App extends React.Component<{}, S> {
             [selectedItemId]: [...comments, text],
         };
 
-        this.setState({ commentsForItem: updated });
+        this.setState({commentsForItem: updated});
+
+        try {
+            await AsyncStorage.setItem(ASYNC_STORAGE_COMMENTS_KEY, JSON.stringify(updated));
+        }
+        catch (e) {
+            console.log('Failed to save comment', text, 'for', selectedItemId,);
+        }
     };
 
     openCommentScreen = id => {
