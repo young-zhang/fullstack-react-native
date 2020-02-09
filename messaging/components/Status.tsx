@@ -1,6 +1,8 @@
 import Constants from 'expo-constants';
-import NetInfo from '@react-native-community/netinfo';
+// see https://github.com/react-native-community/react-native-netinfo/blob/master/README.md
 import {Platform, StatusBar, StyleSheet, Text, View} from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
+import * as Types from "@react-native-community/netinfo/src/internal/types";
 import React from 'react';
 
 interface S {
@@ -10,6 +12,26 @@ interface S {
 export default class Status extends React.Component<{}, S> {
     state = {
         isConnected: null,
+    };
+    private unsubscribe : Types.NetInfoSubscription;
+
+    async componentDidMount() {
+        this.unsubscribe = NetInfo.addEventListener(this.handleChange);
+
+        const { isConnected } = await NetInfo.fetch();
+
+        this.setState({ isConnected });
+
+        // We can use this to test changes in network connectivity
+        // setTimeout(() => this.handleChange({ isConnected: false }), 3000);
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
+
+    handleChange = ({ isConnected }) => {
+        this.setState({ isConnected });
     };
 
     render() {

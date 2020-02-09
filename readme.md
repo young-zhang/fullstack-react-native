@@ -12,7 +12,7 @@ p96: `expo init time-tracking --template expo-template-blank-typescript@sdk-36 -
 
 See: [Building React Stateless Functional Components with TypeScript](https://www.pluralsight.com/guides/typescript-building-react-components)
 
-p119: `expo install uuid`
+p119: `yarn add uuid`
 
 p164: [Default props with class component for TypeScript](https://stackoverflow.com/a/37282264/584829)
 
@@ -24,4 +24,8 @@ p196: `yarn add expo-constants`
 ## Core APIs, Part 1
 p274: `expo init messaging --template expo-template-blank-typescript@sdk-36 --yarn`
 
-p274: `expo install expo-constants expo-permissions expo-media-library expo-cameraroll @react-native-community/netinfo react-native-maps`
+p274: `yarn add expo-constants expo-permissions expo-media-library expo-cameraroll @react-native-community/netinfo react-native-maps`
+
+p292: `yarn add @react-native-community/netinfo@5.0.0` to fix the 
+"[RNCNetInfo.getCurrentState got 3 arguments, expected 2](https://github.com/react-native-community/react-native-netinfo/issues/297)"
+error.
