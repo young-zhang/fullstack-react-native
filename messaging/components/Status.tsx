@@ -18,9 +18,8 @@ export default class Status extends React.Component<{}, S> {
     async componentDidMount() {
         this.unsubscribe = NetInfo.addEventListener(this.handleChange);
 
-        const { isConnected } = await NetInfo.fetch();
-
-        this.setState({ isConnected });
+        let connState = await NetInfo.fetch();
+        this.setState({ isConnected: connState.isInternetReachable });
 
         // We can use this to test changes in network connectivity
         // setTimeout(() => this.handleChange({ isConnected: false }), 3000);
