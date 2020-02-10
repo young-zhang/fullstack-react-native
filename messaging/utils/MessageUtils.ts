@@ -13,7 +13,7 @@ export interface MessageShape {
 
 let messageId: number = 0;
 
-function getNextId() {
+function getNextId(): number {
     messageId += 1;
     return messageId;
 }
