@@ -29,3 +29,5 @@ p274: `expo install expo-constants expo-permissions expo-media-library expo-came
 p292: `expo install @react-native-community/netinfo@5.0.0` to fix the 
 "[RNCNetInfo.getCurrentState got 3 arguments, expected 2](https://github.com/react-native-community/react-native-netinfo/issues/297)"
 error.
+
+p295: [TypeScript equivalent of `PropTypes.oneOf(['Foo', 'Bar'])`](https://stackoverflow.com/questions/50248807/what-is-the-typescript-equivalent-of-proptypes-oneof-restrict-a-variable-to-s)
