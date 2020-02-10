@@ -1,11 +1,11 @@
-import {FlatList, Image, ListRenderItemInfo, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, GestureResponderEvent, Image, ListRenderItemInfo, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import React from 'react';
 import {MessageShape} from '../utils/MessageUtils';
 
 interface P {
     messages: MessageShape[]
-    onPressMessage: (any) => any
+    onPressMessage: (MessageShape) => void;
 }
 
 const keyExtractor = item => item.id.toString();
