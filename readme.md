@@ -31,3 +31,7 @@ p292: `expo install @react-native-community/netinfo@5.0.0` to fix the
 error.
 
 p295: [TypeScript equivalent of `PropTypes.oneOf(['Foo', 'Bar'])`](https://stackoverflow.com/questions/50248807/what-is-the-typescript-equivalent-of-proptypes-oneof-restrict-a-variable-to-s)
+
+p305: Nested types such as `MapView.Marker` [requires special handling](https://stackoverflow.com/questions/57376708/why-mapview-marker-does-not-exist-on-type-typeof-mapview),
+with `import MapView, {Marker} from 'react-native-maps';` to resolve 
+the error message `MapView.Marker does not exist on type 'typeof MapView'`.
