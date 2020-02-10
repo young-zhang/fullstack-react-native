@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import React, {ReactNode} from 'react';
 import Status from './components/Status';
 import MessageList from './components/MessageList';
@@ -19,6 +19,36 @@ export default class App extends React.Component {
 
     handlePressMessage = (msg: MessageShape) => {
         let {id, type} = msg;
+        switch (type) {
+        case 'text':
+            Alert.alert(
+                'Delete message?',
+                'Are you sure you want to permanently delete this message?',
+                [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'Delete',
+                        style: 'destructive',
+                        onPress: () => {
+                            const {messages} = this.state;
+                            this.setState({messages: messages.filter(message => message.id !== id)});
+                        }
+                    }
+                ]
+            );
+            break;
+        case 'image':
+            this.setState({
+                fullscreenImageId: id,
+                isInputFocused: false,
+            });
+            break;
+        default:
+            break;
+        }
     };
 
     renderMessageList(): ReactNode {
