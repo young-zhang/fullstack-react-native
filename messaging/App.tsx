@@ -48,6 +48,21 @@ export default class App extends React.Component {
     };
 
     handlePressToolbarLocation = () => {
+        const {messages} = this.state;
+
+        navigator.geolocation.getCurrentPosition(position => {
+            const {coords: {latitude, longitude}} = position;
+            console.log(`Received coordinates: ${latitude}, ${longitude}`);
+            this.setState({
+                messages: [
+                    createLocationMessage({
+                        latitude,
+                        longitude,
+                    }),
+                    ...messages,
+                ],
+            });
+        });
     };
 
     handlePressMessage = (msg: MessageShape) => {
