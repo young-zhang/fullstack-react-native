@@ -4,6 +4,7 @@ import Status from './components/Status';
 import MessageList from './components/MessageList';
 import {createImageMessage, createLocationMessage, createTextMessage, MessageShape,} from './utils/MessageUtils';
 import Toolbar from './components/Toolbar';
+import ImageGrid from './components/ImageGrid';
 
 export default class App extends React.Component {
     state = {
@@ -117,9 +118,11 @@ export default class App extends React.Component {
         );
     }
 
-    renderInputMethodEditor(): ReactNode {
-        return (<View style={styles.inputMethodEditor} />);
-    }
+    renderInputMethodEditor = () => (
+        <View style={styles.inputMethodEditor}>
+            <ImageGrid />
+        </View>
+    );
 
     renderToolbar() {
         const {isInputFocused} = this.state;
