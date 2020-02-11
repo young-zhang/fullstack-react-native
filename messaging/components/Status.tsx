@@ -13,13 +13,13 @@ export default class Status extends React.Component<{}, S> {
     state = {
         isConnected: null,
     };
-    private unsubscribe : Types.NetInfoSubscription;
+    private unsubscribe: Types.NetInfoSubscription;
 
     async componentDidMount() {
         this.unsubscribe = NetInfo.addEventListener(this.handleChange);
 
-        let connState = await NetInfo.fetch();
-        this.setState({ isConnected: connState.isInternetReachable });
+        const connState = await NetInfo.fetch();
+        this.setState({isConnected: connState.isInternetReachable});
 
         // We can use this to test changes in network connectivity
         // setTimeout(() => this.handleChange({ isConnected: false }), 3000);
@@ -29,8 +29,8 @@ export default class Status extends React.Component<{}, S> {
         this.unsubscribe();
     }
 
-    handleChange = ({ isConnected }) => {
-        this.setState({ isConnected });
+    handleChange = ({isConnected}) => {
+        this.setState({isConnected});
     };
 
     render() {
@@ -38,8 +38,8 @@ export default class Status extends React.Component<{}, S> {
         const backgroundColor = isConnected ? 'white' : 'red';
 
         const statusBar = (<StatusBar backgroundColor={backgroundColor}
-                                      barStyle={isConnected ? 'dark-content' : 'light-content'}
-                                      animated={false} />);
+                                    barStyle={isConnected ? 'dark-content' : 'light-content'}
+                                    animated={false} />);
 
         const messageContainer = (
             <View style={styles.messageContainer} pointerEvents={'none'}>

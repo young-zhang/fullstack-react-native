@@ -17,7 +17,7 @@ export default class MessageList extends React.Component<P> {
     };
 
     renderMessageBody = (item: MessageShape): React.ReactElement | null => {
-        let {type, text, uri, coordinate} = item;
+        const {type, text, uri, coordinate} = item;
         switch (type) {
         case 'text':
             return (
@@ -44,7 +44,7 @@ export default class MessageList extends React.Component<P> {
     };
 
     renderMessageItem = (renderItem: ListRenderItemInfo<MessageShape>): React.ReactElement => {
-        let item = renderItem.item;
+        const item = renderItem.item;
         const {onPressMessage} = this.props;
 
         return (
