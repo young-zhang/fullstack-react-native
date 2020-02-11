@@ -1,4 +1,4 @@
-import {GestureResponderEvent, StyleSheet, Text, TextInput, TouchableOpacity, View,} from 'react-native';
+import {GestureResponderEvent, NativeSyntheticEvent, StyleSheet, Text, TextInput, TextInputFocusEventData, TouchableOpacity, View,} from 'react-native';
 import React from 'react';
 
 const ToolbarButton: React.FC<{ title: string, onPress: (GestureResponderEvent) => void }> = () => {
@@ -12,7 +12,7 @@ const ToolbarButton: React.FC<{ title: string, onPress: (GestureResponderEvent) 
 
 interface ToolbarProp {
     isFocused: boolean
-    onChangeFocus?: (any) => any
+    onChangeFocus?: (boolean) => void
     onSubmit?: (string) => void
     onPressCamera?: (GestureResponderEvent) => void
     onPressLocation?: (GestureResponderEvent) => void
@@ -24,13 +24,40 @@ interface ToolbarState {
 
 export default class Toolbar extends React.Component<ToolbarProp, ToolbarState> {
     static defaultProps = {
-        onChangeFocus: () => { },
+        onChangeFocus: (t: boolean) => { },
         onSubmit: () => { },
         onPressCamera: () => { },
         onPressLocation: () => { },
     };
 
     state = {text: ''};
+
+    componentDidUpdate(prevProps) {
+        if (this.props.isFocused !== prevProps.isFocused) {
+            if (this.props.isFocused) {
+                this.input.focus();
+            }
+            else {
+                this.input.blur();
+            }
+        }
+    }
+
+    private input: TextInput;
+
+    setInputRef = (ref: TextInput) => {
+        this.input = ref;
+    };
+
+    handleFocus = () => {
+        const {onChangeFocus} = this.props;
+        onChangeFocus(true);
+    };
+
+    handleBlur = () => {
+        const {onChangeFocus} = this.props;
+        onChangeFocus(false);
+    };
 
     handleChangeText = (text) => { this.setState({text}); };
 
@@ -59,7 +86,10 @@ export default class Toolbar extends React.Component<ToolbarProp, ToolbarState> 
                                blurOnSubmit={false}
                                value={text}
                                onChangeText={this.handleChangeText}
-                               onSubmitEditing={this.handleSubmitEditing} />
+                               onSubmitEditing={this.handleSubmitEditing}
+                               ref={this.setInputRef}
+                               onFocus={this.handleFocus}
+                               onBlur={this.handleBlur} />
                 </View>
             </View>
         );
