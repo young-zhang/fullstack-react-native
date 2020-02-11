@@ -1,4 +1,4 @@
-import {Alert, Image, StyleSheet, TouchableHighlight, View} from 'react-native';
+import {Alert, BackHandler, Image, NativeEventSubscription, StyleSheet, TouchableHighlight, View} from 'react-native';
 import React, {ReactNode} from 'react';
 import Status from './components/Status';
 import MessageList from './components/MessageList';
@@ -17,6 +17,26 @@ export default class App extends React.Component {
         ],
         fullscreenImageId: null,
     };
+
+    private backHandlerSubscription: NativeEventSubscription;
+
+    componentDidMount() {
+        this.backHandlerSubscription = BackHandler.addEventListener(
+            'hardwareBackPress',
+            () => {
+                const { fullscreenImageId } = this.state;
+                if (fullscreenImageId) {
+                    this.dismissFullscreenImage();
+                    return true;
+                }
+                return false;
+            },
+        );
+    }
+
+    componentWillUnmount() {
+        this.backHandlerSubscription.remove();
+    }
 
     dismissFullscreenImage = (): void => {
         this.setState({fullscreenImageId: null});
