@@ -1,14 +1,16 @@
 import {GestureResponderEvent, NativeSyntheticEvent, StyleSheet, Text, TextInput, TextInputFocusEventData, TouchableOpacity, View,} from 'react-native';
 import React from 'react';
 
-const ToolbarButton: React.FC<{ title: string, onPress: (GestureResponderEvent) => void }> = () => {
-    const {title, onPress} = this.prop;
-    return (
-        <TouchableOpacity onPress={onPress}>
-            <Text style={styles.button}>{title}</Text>
-        </TouchableOpacity>
-    )
-};
+class ToolbarButton extends React.Component<{ title: string, onPress: (GestureResponderEvent) => void }> {
+    render() {
+        const {title, onPress} = this.props;
+        return (
+            <TouchableOpacity onPress={onPress}>
+                <Text style={styles.button}>{title}</Text>
+            </TouchableOpacity>
+        );
+    }
+}
 
 interface ToolbarProp {
     isFocused: boolean

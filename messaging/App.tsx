@@ -3,6 +3,7 @@ import React, {ReactNode} from 'react';
 import Status from './components/Status';
 import MessageList from './components/MessageList';
 import {createImageMessage, createLocationMessage, createTextMessage, MessageShape,} from './utils/MessageUtils';
+import Toolbar from './components/Toolbar';
 
 export default class App extends React.Component {
     state = {
@@ -16,6 +17,7 @@ export default class App extends React.Component {
             })
         ],
         fullscreenImageId: null,
+        isInputFocused: false,
     };
 
     private backHandlerSubscription: NativeEventSubscription;
@@ -24,7 +26,7 @@ export default class App extends React.Component {
         this.backHandlerSubscription = BackHandler.addEventListener(
             'hardwareBackPress',
             () => {
-                const { fullscreenImageId } = this.state;
+                const {fullscreenImageId} = this.state;
                 if (fullscreenImageId) {
                     this.dismissFullscreenImage();
                     return true;
@@ -40,6 +42,12 @@ export default class App extends React.Component {
 
     dismissFullscreenImage = (): void => {
         this.setState({fullscreenImageId: null});
+    };
+
+    handlePressToolbarCamera = () => {
+    };
+
+    handlePressToolbarLocation = () => {
     };
 
     handlePressMessage = (msg: MessageShape) => {
@@ -73,6 +81,15 @@ export default class App extends React.Component {
         }
     };
 
+    handleSubmit = (text) => {
+        const {messages} = this.state;
+        this.setState({messages: [createTextMessage(text), ...messages]});
+    };
+
+    handleChangeFocus = (isFocused) => {
+        this.setState({isInputFocused: isFocused});
+    };
+
     renderMessageList(): ReactNode {
         const {messages} = this.state;
         return (
@@ -86,8 +103,18 @@ export default class App extends React.Component {
         return (<View style={styles.inputMethodEditor} />);
     }
 
-    renderToolbar(): ReactNode {
-        return (<View style={styles.toolbar} />);
+    renderToolbar() {
+        const {isInputFocused} = this.state;
+
+        return (
+            <View style={styles.toolbar}>
+                <Toolbar isFocused={isInputFocused}
+                         onSubmit={this.handleSubmit}
+                         onChangeFocus={this.handleChangeFocus}
+                         onPressCamera={this.handlePressToolbarCamera}
+                         onPressLocation={this.handlePressToolbarLocation} />
+            </View>
+        );
     }
 
     renderFullscreenImage = (): ReactNode | null => {
