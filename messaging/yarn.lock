@@ -2162,10 +2162,10 @@ expo-asset@~8.0.0:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
-expo-cameraroll@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/expo-cameraroll/-/expo-cameraroll-1.0.1.tgz#1f2496421b1eff0c9377b2e955f950d1f635b5ad"
-  integrity sha512-hBURF52vKXbwVguIkcdLWfEhxK3lZYoN9xGf26CdHvXEh3yGA4LS/tgQgShbYhc+bqJl1sgip2v+ZgxKxKZXgg==
+expo-cameraroll@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/expo-cameraroll/-/expo-cameraroll-0.0.1.tgz#f4afe47ba2ee8b7f55b317636e9f550e87f6b442"
+  integrity sha512-kTNGzFcUlzhyNW8/WMvOBGa1L4ssCFkfKjd+j1hPIFo/u2iUJYOSFZIHbj9hhx/Iz9Y3K9pVBpY7WRY1thQY1A==
 
 expo-constants@~8.0.0:
   version "8.0.0"
