@@ -1,5 +1,6 @@
 import {GetPhotosReturnType, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import CameraRoll from 'expo-cameraroll'
+import * as Permissions from 'expo-permissions';
 import React from 'react';
 import Grid from './Grid';
 
@@ -25,6 +26,15 @@ export default class ImageGrid extends React.Component<P, { images: any[] }> {
 
     getImages = async (after?: string) => {
         if (this.loading) return;
+
+        const { status } = await Permissions.askAsync(
+            Permissions.CAMERA_ROLL,
+        );
+
+        if (status !== 'granted') {
+            console.log('Camera roll permission denied');
+            return;
+        }
 
         this.loading = true;
 
