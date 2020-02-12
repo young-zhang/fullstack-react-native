@@ -42,3 +42,5 @@ p345: Expo 36.0.0 [change log](https://github.com/expo/expo/blob/master/CHANGELO
 under **Breaking Changes** says 
 _removed CameraRoll from react-native core, 
 developers are encouraged to use [expo-media-library](https://docs.expo.io/versions/latest/sdk/media-library/) instead_.
+
+p347: [iOS requires asking for Permissions.CAMERA_ROLL](https://github.com/expo/expo/issues/1696).
