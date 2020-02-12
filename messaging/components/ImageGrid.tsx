@@ -1,17 +1,15 @@
 import {GetPhotosReturnType, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import CameraRoll from 'expo-cameraroll'
-import * as Permissions from 'expo-permissions';
-import PropTypes from 'prop-types';
 import React from 'react';
 import Grid from './Grid';
 
 const keyExtractor = ({uri}) => uri;
 
-interface P {onPressImage: () => void}
+interface P {onPressImage: any}
 
-export default class ImageGrid extends React.Component<P, {images: any[]}> {
+export default class ImageGrid extends React.Component<P, { images: any[] }> {
     static defaultProps = {
-        onPressImage: () => {},
+        onPressImage: (string) => {},
     };
 
     state = {
@@ -62,13 +60,23 @@ export default class ImageGrid extends React.Component<P, {images: any[]}> {
     };
 
     renderItem = ({item: {uri}, size, marginTop, marginLeft}) => {
+        const {onPressImage} = this.props;
+
         const style = {
             width: size,
             height: size,
             marginLeft,
             marginTop,
         };
-        return (<Image source={{uri}} style={style} />);
+
+        return (
+            <TouchableOpacity key={uri}
+                              activeOpacity={0.75}
+                              onPress={() => onPressImage(uri)}
+                              style={style}>
+                <Image source={{uri}} style={styles.image} />
+            </TouchableOpacity>
+        );
     };
 
     render() {
