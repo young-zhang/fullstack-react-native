@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 interface P {
-    data: any;
+    data: any[];
     renderItem: (any) => React.ReactElement | null
     numColumns: number
     itemMargin: number
+    keyExtractor?: any
+    onEndReached?: any
 }
 
 export default class Grid extends React.Component<P> {
