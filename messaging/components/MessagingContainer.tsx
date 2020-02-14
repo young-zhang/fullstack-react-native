@@ -118,12 +118,21 @@ export default class MessagingContainer extends React.Component<P> {
         // the `inputMethod` yet).
         const showCustomInput = inputMethod === INPUT_METHOD.CUSTOM && !keyboardWillShow;
 
+        // The keyboard is hidden and not transitioning up
+        const keyboardIsHidden = inputMethod === INPUT_METHOD.NONE && !keyboardWillShow;
+
+        // The keyboard is visible and transitioning down
+        const keyboardIsHiding = inputMethod === INPUT_METHOD.KEYBOARD && keyboardWillHide;
+
         // If `keyboardHeight` is `0`, this means a hardware keyboard is
         // connected to the device. We still want to show our custom image
         // picker when a hardware keyboard is connected, so let's set
         // `keyboardHeight` to `250` in this case.
+
         const inputStyle = {
             height: showCustomInput ? keyboardHeight || 250 : 0,
+            // Show extra space if the device is an iPhone X the keyboard is not visible
+            marginTop: isIphoneX() && (keyboardIsHidden || keyboardIsHiding) ? 24 : 0
         };
 
         return (
