@@ -1,7 +1,10 @@
 import {BackHandler, LayoutAnimation, Platform, UIManager, View,} from 'react-native';
 import PropTypes, {ReactNodeLike} from 'prop-types';
-
 import React from 'react';
+
+if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 export const INPUT_METHOD = {
     NONE: 'NONE',
@@ -40,6 +43,7 @@ export default class MessagingContainer extends React.Component<P> {
 
     componentDidUpdate(prevProps) {
         const {onChangeInputMethod} = this.props;
+
         if (this.props.keyboardVisible && !prevProps.keyboardVisible) {
             // Keyboard shown
             onChangeInputMethod(INPUT_METHOD.KEYBOARD);
@@ -52,6 +56,17 @@ export default class MessagingContainer extends React.Component<P> {
         ) {
             onChangeInputMethod(INPUT_METHOD.NONE);
         }
-        // ... more to come!
+
+        const {keyboardAnimationDuration} = this.props;
+
+        // Animate between states
+        const animation = LayoutAnimation.create(
+            keyboardAnimationDuration,
+            Platform.OS === 'android'
+                ? LayoutAnimation.Types.easeInEaseOut
+                : LayoutAnimation.Types.keyboard,
+            LayoutAnimation.Properties.opacity,
+        );
+        LayoutAnimation.configureNext(animation);
     }
 }
