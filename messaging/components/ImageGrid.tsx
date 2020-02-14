@@ -6,7 +6,7 @@ import Grid from './Grid';
 
 const keyExtractor = ({uri}) => uri;
 
-interface P {onPressImage: any}
+interface P {onPressImage: (string) => void}
 
 export default class ImageGrid extends React.Component<P, { images: any[] }> {
     static defaultProps = {

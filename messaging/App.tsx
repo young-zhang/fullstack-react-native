@@ -100,6 +100,12 @@ export default class App extends React.Component {
         }
     };
 
+    handlePressImage = uri => {
+        const {messages} = this.state;
+
+        this.setState({messages: [createImageMessage(uri), ...messages]});
+    };
+
     handleSubmit = (text) => {
         const {messages} = this.state;
         this.setState({messages: [createTextMessage(text), ...messages]});
@@ -120,7 +126,7 @@ export default class App extends React.Component {
 
     renderInputMethodEditor = () => (
         <View style={styles.inputMethodEditor}>
-            <ImageGrid />
+            <ImageGrid onPressImage={this.handlePressImage} />
         </View>
     );
 
