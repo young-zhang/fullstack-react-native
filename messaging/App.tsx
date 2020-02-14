@@ -5,6 +5,9 @@ import MessageList from './components/MessageList';
 import {createImageMessage, createLocationMessage, createTextMessage, MessageShape,} from './utils/MessageUtils';
 import Toolbar from './components/Toolbar';
 import ImageGrid from './components/ImageGrid';
+import KeyboardState from './components/KeyboardState';
+import MeasureLayout from './components/MeasureLayout';
+import MessagingContainer, {INPUT_METHOD} from './components/MessagingContainer';
 
 export default class App extends React.Component {
     state = {
@@ -19,6 +22,7 @@ export default class App extends React.Component {
         ],
         fullscreenImageId: null,
         isInputFocused: false,
+        inputMethod: INPUT_METHOD.NONE,
     };
 
     private backHandlerSubscription: NativeEventSubscription;
@@ -46,6 +50,7 @@ export default class App extends React.Component {
     };
 
     handlePressToolbarCamera = () => {
+        this.setState({isInputFocused: false, inputMethod: INPUT_METHOD.CUSTOM});
     };
 
     handlePressToolbarLocation = () => {
@@ -113,6 +118,10 @@ export default class App extends React.Component {
 
     handleChangeFocus = (isFocused) => {
         this.setState({isInputFocused: isFocused});
+    };
+
+    handleChangeInputMethod = inputMethod => {
+        this.setState({inputMethod});
     };
 
     renderMessageList(): ReactNode {
