@@ -1,4 +1,4 @@
-import {BackHandler, LayoutAnimation, Platform, UIManager, View,} from 'react-native';
+import {BackHandler, LayoutAnimation, NativeEventSubscription, Platform, UIManager, View,} from 'react-native';
 import PropTypes, {ReactNodeLike} from 'prop-types';
 import React from 'react';
 
@@ -39,7 +39,27 @@ export default class MessagingContainer extends React.Component<P> {
         onChangeInputMethod: () => {},
     };
 
-    // ...
+    private subscription: NativeEventSubscription;
+
+    componentDidMount() {
+        this.subscription = BackHandler.addEventListener(
+            'hardwareBackPress',
+            () => {
+                const { onChangeInputMethod, inputMethod } = this.props;
+
+                if (inputMethod === INPUT_METHOD.CUSTOM) {
+                    onChangeInputMethod(INPUT_METHOD.NONE);
+                    return true;
+                }
+
+                return false;
+            }
+        );
+    }
+
+    componentWillUnmount() {
+        this.subscription.remove();
+    }
 
     componentDidUpdate(prevProps) {
         const {onChangeInputMethod} = this.props;
