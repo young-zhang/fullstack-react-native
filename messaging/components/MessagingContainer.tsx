@@ -1,5 +1,7 @@
 import {BackHandler, LayoutAnimation, NativeEventSubscription, Platform, UIManager, View,} from 'react-native';
 import PropTypes, {ReactNodeLike} from 'prop-types';
+import {isIphoneX} from 'react-native-iphone-x-helper';
+
 import React from 'react';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
@@ -68,12 +70,8 @@ export default class MessagingContainer extends React.Component<P> {
             // Keyboard shown
             onChangeInputMethod(INPUT_METHOD.KEYBOARD);
         }
-        else if (
-            // Keyboard hidden
-            !this.props.keyboardVisible &&
-            prevProps.keyboardVisible &&
-            this.props.inputMethod !== INPUT_METHOD.CUSTOM
-        ) {
+        else if (!this.props.keyboardVisible && prevProps.keyboardVisible && this.props.inputMethod !== INPUT_METHOD.CUSTOM) {            // Keyboard hidden
+
             onChangeInputMethod(INPUT_METHOD.NONE);
         }
 
@@ -127,7 +125,7 @@ export default class MessagingContainer extends React.Component<P> {
         const inputStyle = {
             height: showCustomInput ? keyboardHeight || 250 : 0,
         };
-        
+
         return (
             <View style={containerStyle}>
                 {children}
