@@ -167,12 +167,25 @@ export default class App extends React.Component {
     };
 
     render() {
+        const {inputMethod} = this.state;
         return (
             <View style={styles.container}>
                 <Status />
-                {this.renderMessageList()}
-                {this.renderToolbar()}
-                {this.renderInputMethodEditor()}
+                <MeasureLayout>
+                    {layout => (
+                        <KeyboardState layout={layout}>
+                            {keyboardInfo => (
+                                <MessagingContainer {...keyboardInfo}
+                                                    inputMethod={inputMethod}
+                                                    onChangeInputMethod={this.handleChangeInputMethod}
+                                                    renderInputMethodEditor={this.renderInputMethodEditor}>
+                                    {this.renderMessageList()}
+                                    {this.renderToolbar()}
+                                </MessagingContainer>
+                            )}
+                        </KeyboardState>
+                    )}
+                </MeasureLayout>
                 {this.renderFullscreenImage()}
             </View>
         );
