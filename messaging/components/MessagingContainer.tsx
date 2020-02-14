@@ -45,7 +45,7 @@ export default class MessagingContainer extends React.Component<P> {
         this.subscription = BackHandler.addEventListener(
             'hardwareBackPress',
             () => {
-                const { onChangeInputMethod, inputMethod } = this.props;
+                const {onChangeInputMethod, inputMethod} = this.props;
 
                 if (inputMethod === INPUT_METHOD.CUSTOM) {
                     onChangeInputMethod(INPUT_METHOD.NONE);
@@ -88,5 +88,51 @@ export default class MessagingContainer extends React.Component<P> {
             LayoutAnimation.Properties.opacity,
         );
         LayoutAnimation.configureNext(animation);
+    }
+
+    render() {
+        const {
+            children,
+            renderInputMethodEditor,
+            inputMethod,
+            containerHeight,
+            contentHeight,
+            keyboardHeight,
+            keyboardWillShow,
+            keyboardWillHide,
+        } = this.props;
+
+        // For our outer `View`, we want to choose between rendering at
+        // full height (`containerHeight`) or only the height above the
+        // keyboard (`contentHeight`). If the keyboard is currently
+        // appearing (`keyboardWillShow` is `true`) or if it's fully
+        // visible (`inputMethod === INPUT_METHOD.KEYBOARD`), we should
+        // use `contentHeight`.
+        const useContentHeight = keyboardWillShow || inputMethod === INPUT_METHOD.KEYBOARD;
+        const containerStyle = {
+            height: useContentHeight ? contentHeight : containerHeight,
+        };
+
+        // We want to render our custom input when the user has pressed
+        // the camera button (`inputMethod === INPUT_METHOD.CUSTOM`), so
+        // long as the keyboard isn't currently appearing (which would
+        // mean the input field has received focus, but we haven't updated
+        // the `inputMethod` yet).
+        const showCustomInput = inputMethod === INPUT_METHOD.CUSTOM && !keyboardWillShow;
+
+        // If `keyboardHeight` is `0`, this means a hardware keyboard is
+        // connected to the device. We still want to show our custom image
+        // picker when a hardware keyboard is connected, so let's set
+        // `keyboardHeight` to `250` in this case.
+        const inputStyle = {
+            height: showCustomInput ? keyboardHeight || 250 : 0,
+        };
+        
+        return (
+            <View style={containerStyle}>
+                {children}
+                <View style={inputStyle}>{renderInputMethodEditor()}</View>
+            </View>
+        );
     }
 }
