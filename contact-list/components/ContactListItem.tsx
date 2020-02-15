@@ -7,7 +7,7 @@ interface P {
     name: string
     avatar: string
     phone: string
-    onPress: any
+    onPress?: any
 }
 
 const ContactListItem: React.FC<P> = ({name, avatar, phone, onPress}) => {
