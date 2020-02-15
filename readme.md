@@ -44,3 +44,6 @@ _removed CameraRoll from react-native core,
 developers are encouraged to use [expo-media-library](https://docs.expo.io/versions/latest/sdk/media-library/) instead_.
 
 p347: [iOS requires asking for Permissions.CAMERA_ROLL](https://github.com/expo/expo/issues/1696).
+
+## Navigation
+p400: `expo init contact-list --template expo-template-blank-typescript@sdk-36 --yarn`
