@@ -47,3 +47,5 @@ p347: [iOS requires asking for Permissions.CAMERA_ROLL](https://github.com/expo/
 
 ## Navigation
 p400: `expo init contact-list --template expo-template-blank-typescript@sdk-36 --yarn`
+
+p401: `expo install uuid@3.1.0`

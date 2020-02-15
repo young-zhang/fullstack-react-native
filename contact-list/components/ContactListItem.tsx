@@ -28,13 +28,6 @@ const ContactListItem: React.FC<P> = ({name, avatar, phone, onPress}) => {
 };
 export default ContactListItem;
 
-// ContactListItem.propTypes = {
-//     name: PropTypes.string.isRequired,
-//     avatar: PropTypes.string.isRequired,
-//     phone: PropTypes.string.isRequired,
-//     onPress: PropTypes.func.isRequired,
-// };
-
 const styles = StyleSheet.create({
     container: {
         paddingLeft: 24,
