@@ -1,8 +1,6 @@
 import React from 'react';
-
-import Contacts from './screens/Contacts';
-import Profile from "./screens/Profile";
+import AppContainer from './routes';
 
 export default function App() {
-  return <Profile />;
+  return <AppContainer />;
 }
