@@ -49,3 +49,5 @@ p347: [iOS requires asking for Permissions.CAMERA_ROLL](https://github.com/expo/
 p400: `expo init contact-list --template expo-template-blank-typescript@sdk-36 --yarn`
 
 p401: `expo install uuid@3.1.0`
+
+p412: `expo install react-navigation@4.0.10 react-navigation-stack@^1.7.3 react-navigation-tabs@^1.2.0 react-navigation-drawer@^1.4.0 react-native-gesture-handler react-native-reanimated`
