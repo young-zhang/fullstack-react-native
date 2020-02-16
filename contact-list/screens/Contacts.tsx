@@ -7,13 +7,19 @@ import {fetchContacts} from '../utils/api';
 
 const keyExtractor = ({phone}) => phone;
 
+interface P {
+    navigation: {
+        navigate: (string) => void
+    }
+}
+
 interface S {
     contacts: any[],
     loading: boolean,
     error: boolean,
 }
 
-export default class Contacts extends React.Component<{}, S> {
+export default class Contacts extends React.Component<P, S> {
     state = {
         contacts: [],
         loading: true,
@@ -38,8 +44,10 @@ export default class Contacts extends React.Component<{}, S> {
     }
 
     renderContact = ({item}) => {
+        const {navigation: {navigate}} = this.props;
         const {name, avatar, phone} = item;
-        return (<ContactListItem name={name} avatar={avatar} phone={phone} />);
+
+        return (<ContactListItem name={name} avatar={avatar} phone={phone} onPress={() => navigate('Profile')} />);
     };
 
     render() {
