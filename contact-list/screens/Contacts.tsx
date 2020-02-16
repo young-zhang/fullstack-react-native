@@ -9,7 +9,7 @@ const keyExtractor = ({phone}) => phone;
 
 interface P {
     navigation: {
-        navigate: (string) => void
+        navigate: (string, {contact: any}) => void
     }
 }
 
@@ -45,9 +45,9 @@ export default class Contacts extends React.Component<P, S> {
 
     renderContact = ({item}) => {
         const {navigation: {navigate}} = this.props;
-        const {name, avatar, phone} = item;
+        const {id, name, avatar, phone} = item;
 
-        return (<ContactListItem name={name} avatar={avatar} phone={phone} onPress={() => navigate('Profile')} />);
+        return (<ContactListItem name={name} avatar={avatar} phone={phone} onPress={() => navigate('Profile', {contact: item})} />);
     };
 
     render() {
