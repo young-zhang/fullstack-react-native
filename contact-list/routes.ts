@@ -5,7 +5,10 @@ import Contacts from './screens/Contacts';
 import Profile from './screens/Profile';
 
 const StackNavigator = createStackNavigator({
-    Contacts: {screen: Contacts},
+    Contacts: {
+        screen: Contacts,
+        navigationOptions: {title: 'Contacts'}
+    },
     Profile: {screen: Profile},
 });
 
