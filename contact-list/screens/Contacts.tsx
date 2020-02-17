@@ -20,6 +20,8 @@ interface S {
 }
 
 export default class Contacts extends React.Component<P, S> {
+    static navigationOptions = {title: 'Contacts'};
+
     state = {
         contacts: [],
         loading: true,
